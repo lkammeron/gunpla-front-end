@@ -1,3 +1,4 @@
+//Post Function
 export async function createGunpla(formData) {
     const response = await fetch('http://145.24.237.238:8001/gunpla', {
         method: "POST",
@@ -13,4 +14,14 @@ export async function createGunpla(formData) {
     }
 
     return await response.json();
+}
+
+export async function deleteGunpla(id){
+    return await fetch(`http://145.24.237.238:8001/gunpla/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Accept": "application/json",
+            "content-Type": "application/json",
+        },
+    });
 }

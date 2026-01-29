@@ -40,9 +40,9 @@ function Gunpla(){
                                 <h3 className="mt-3 mb-6 font-extrabold text-3xl text-gray-900 antialiased">
                                     {gundam.name}
                                 </h3>
-                                    <h5>Grade: {gundam.grade}</h5>
-                                    <h5>Scale: {gundam.scale}</h5>
-                                <button className="bg-red-500 hover:bg-red-700 text-black font-bold py-2 px-4 rounded">
+                                <h5>Grade: {gundam.grade}</h5>
+                                <h5>Scale: {gundam.scale}</h5>
+                                <button className="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded ">
                                     <Link to={`/gunpla/${gundam.id}`}>Read More</Link>
                                 </button>
                             </div>
