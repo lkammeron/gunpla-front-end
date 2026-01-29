@@ -1,48 +1,55 @@
 import { useState } from 'react';
+import { createGunpla } from './services/gunplaService';
 
-function CreateGundam(){
-    const [formData, setFormData] =
-        useState({name: "", origin: "", grade: "", title: "", scale: "", unitType: "", description: ""});
+function CreateGunpla() {
+    const [formData, setFormData] = useState({
+        name: '',
+        origin: '',
+        grade: '',
+        scale: '',
+    });
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-    };
+    function handleChange(e) {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(`Name: ${formData.name}, Title: ${formData.title}, Description: ${formData.message}`
-        );
-    };
+    async function handleSubmit(e) {
+        e.preventDefault();
+        try {
+            await createGunpla(formData);
+            alert('Gunpla aangemaakt!');
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-return(
-    <>
-        <form className="grid grid-cols-1" action={handleSubmit}>
-            <label>
-                Name:<input name="name" value={formData.name} defaultValue="Gundam Shenlong" onChange={handleChange}/>
-            </label>
-            <label>
-                Origin:<input name="type" value={formData.origin} defaultValue="Mobile Suit Gundam Wing" onChange={handleChange}/>
-            </label>
-            <label>
-                Grade:<input name="type" value={formData.grade} defaultValue="MG" onChange={handleChange}/>
-            </label>
-            <label>
-                Title:<input name="type" value={formData.title} defaultValue="Gundam Zero-Five" onChange={handleChange}/>
-            </label>
-            <label>
-                Scale:<input name="type" value={formData.scale} defaultValue="1/100" onChange={handleChange}/>
-            </label>
-            <label>
-                Unit-Type:<input name="type" value={formData.unitType} defaultValue="RX-78-2(Inspired)" onChange={handleChange}/>
-            </label>
-            <label>
-                Description:<textarea  name="description" value={formData.description} defaultValue="RX-78-2(Inspired)" onChange={handleChange}/>
-            </label>
-            <button type="submit">Submit form</button>
+    return (
+        <form onSubmit={handleSubmit}>
+            <input name="name" onChange={handleChange} />
+
+            <select name="origin" onChange={handleChange}>
+                <option value="">Kies origin</option>
+                <option value="gundam">Gundam</option>
+                <option value="zoid">Zoid</option>
+            </select>
+
+            <select name="grade" onChange={handleChange}>
+                <option value="">Kies grade</option>
+                <option value="HG">HG</option>
+                <option value="MG">MG</option>
+            </select>
+
+            <select name="scale" onChange={handleChange}>
+                <option value="1/144">1/144</option>
+                <option value="1/100">1/100</option>
+            </select>
+
+            <button type="submit">Create</button>
         </form>
-    </>
-    )
+    );
 }
 
-export default CreateGundam
+export default CreateGunpla;

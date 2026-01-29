@@ -17,15 +17,13 @@ function Home(){
                 <img className="rounded-t-lg object-fill" src={history} alt="gunpla kit banner"/>
                 <h3 className="font-extrabold text-2xl">Key Aspects of Gunpla</h3>
                 &nbsp;
-                <p>
-                    <b>Grades:</b> Kits are categorized by difficulty and scale, including
-                    <ul>
-                        <li>Entry Grade (EG) (beginner),</li>
-                        <li>High Grade (HG) (1/144 scale, standard),</li>
-                        <li>Master Grade (MG) (1/100, high detail),</li>
-                        <li>Perfect Grade (PG) (1/60, maximum complexity).</li>
-                    </ul>
-                </p>
+                <b>Grades:</b> Kits are categorized by difficulty and scale, including
+                <ul>
+                    <li>Entry Grade (EG) (beginner),</li>
+                    <li>High Grade (HG) (1/144 scale, standard),</li>
+                    <li>Master Grade (MG) (1/100, high detail),</li>
+                    <li>Perfect Grade (PG) (1/60, maximum complexity).</li>
+                </ul>
                 &nbsp;
                 <p>*These are the main grades and when you delve deeper into it there are more subsets of grades for different model lines</p>
                 &nbsp;
