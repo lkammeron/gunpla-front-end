@@ -5,6 +5,7 @@ import Home from "./Home.jsx";
 import Gunpla from "./Gunpla.jsx";
 import GunplaDetail from "./GunplaDetail.jsx";
 import Create from "./Create.jsx";
+import Edit from "./Edit.jsx";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: "/create",
                 element: <Create />,
+            },
+            {
+                path: "/gunpla/:id/edit",
+                element: <Edit />,
             },
         ],
     },

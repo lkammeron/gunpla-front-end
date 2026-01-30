@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router";
+import {Link, useNavigate, useParams} from "react-router";
 import {deleteGunpla} from "./services/gunplaService.js";
 
 function GunplaDetail() {
   const {id} = useParams(); //gunpla_id uit de url opvangen
+  const navigate = useNavigate();
   const [gunpla, setGunpla] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,11 +51,18 @@ function GunplaDetail() {
         return <p>Geen data</p>;
     }
     const handleDelete = async () => {
-        const response = await deleteGunpla(id);
-
-        if (response.status === 204) {
-            console.log("Gunpla deleted");
-            // hier evt navigate('/') of state update
+        try{
+            const response = await deleteGunpla(id);
+            if (response.status === 204) {
+                navigate("/gunpla")
+                // hier evt navigate('/') of state update
+            }
+            else{
+                console.error("Delete Failed");
+            }
+        }
+        catch (error) {
+            console.error(error);
         }
     };
 
@@ -84,6 +92,12 @@ function GunplaDetail() {
                 <button onClick={handleDelete}  className="bg-red-500 hover:bg-red-700 text-black font-bold py-2 px-4 rounded">
                     Delete Gunpla
                 </button>
+                <Link
+                    to={`/gunpla/${id}/edit`}
+                    className="bg-yellow-500 px-4 py-2 rounded"
+                >
+                    Edit
+                </Link>
             </div>
         </article>
     );

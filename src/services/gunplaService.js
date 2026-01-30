@@ -21,7 +21,18 @@ export async function deleteGunpla(id){
         method: 'DELETE',
         headers: {
             "Accept": "application/json",
-            "content-Type": "application/json",
+            "Content-Type": "application/json",
         },
+    });
+}
+
+export async function editGunpla(id, data){
+    return await fetch(`http://145.24.237.238:8001/gunpla/${id}`, {
+        method: 'PUT',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
     });
 }
