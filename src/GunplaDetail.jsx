@@ -4,6 +4,7 @@ import {deleteGunpla} from "./services/gunplaService.js";
 
 function GunplaDetail() {
   const {id} = useParams(); //gunpla_id uit de url opvangen
+    const [notFound, setNotFound] = useState(false);
   const navigate = useNavigate();
   const [gunpla, setGunpla] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,6 +15,7 @@ function GunplaDetail() {
             try {
                 setLoading(true);
                 setError(null);
+                setNotFound(false);
 
                 const response = await fetch(
                     `http://145.24.237.238:8001/gunpla/${id}`, {
@@ -23,8 +25,9 @@ function GunplaDetail() {
                     },
                 });
 
-                if (!response.ok) {
-                    new Error("Gunpla niet gevonden");
+                if (response.status === 404) {
+                    setNotFound(true);
+                    return;
                 }
 
                 const data = await response.json();
@@ -41,6 +44,16 @@ function GunplaDetail() {
 
     if (loading) {
         return <p>Gunpla wordt geladen...</p>;
+    }
+
+    if (notFound) {
+        return (
+            <div>
+                <h1>404</h1>
+                <p>Deze Gunpla bestaat niet.</p>
+                <Link to="/gunpla">Terug naar overzicht</Link>
+            </div>
+        );
     }
 
     if (error) {

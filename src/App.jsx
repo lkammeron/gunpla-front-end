@@ -6,6 +6,7 @@ import Gunpla from "./Gunpla.jsx";
 import GunplaDetail from "./GunplaDetail.jsx";
 import Create from "./Create.jsx";
 import Edit from "./Edit.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
                 path: "/gunpla/:id/edit",
                 element: <Edit />,
             },
+            {
+                path: "*",
+                element: <NotFound />
+            }
         ],
     },
 ]);

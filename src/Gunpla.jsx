@@ -5,22 +5,20 @@ import {GunplaSearch} from "./components/gunplaSearch.jsx";
 
 function Gunpla(){
     const [gundams, setGundams] = useState([]);
-    const [setGunplas] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function getGundams(){
-            try {//http://145.24.237.238:8001
-                const response = await fetch('http://145.24.237.238:8001/gunpla/', {
-                    method: "GET",
+            try {
+                const response = await fetch('http://145.24.237.238:8001/gunpla/',{
+                    method: 'GET',
                     headers: {
-                        Accept: "application/json",
+                        Accept: 'application/json',
                     },
                 });
                 const data = await response.json();
                 setGundams(data.items);
-                console.log(data);
-            }
-            catch(error){
+            } catch(error){
                 console.error("Er is iets fout gegaan!", error);
             }
         }
@@ -29,10 +27,16 @@ function Gunpla(){
 
     return (
         <>
-            <GunplaSearch onSearch={setGunplas} />
+            <GunplaSearch
+                onResults={setGundams}
+                setLoading={setLoading}
+            />
+
+            {loading && <p>Loading...</p>}
+
             <div className="grid grid-cols-2">
                 {gundams.map((gundam) => (
-                    <div key={gundam.id} >
+                    <div key={gundam.id}>
                         <div className="bg-blue-500 rounded-xl max-w-sm ml-2 mt-2 shadow-xs">
                             <Link to={`/gunpla/${gundam.id}`}><img
                                 className="rounded-t-lg h-48 w-96 object-none object-[1%_45%]"
