@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router";
 import head from "./assets/img-header-gp.png";
+import {GunplaSearch} from "./components/gunplaSearch.jsx";
 
 function Gunpla(){
     const [gundams, setGundams] = useState([]);
+    const [setGunplas] = useState([]);
 
     useEffect(() => {
         async function getGundams(){
@@ -27,6 +29,7 @@ function Gunpla(){
 
     return (
         <>
+            <GunplaSearch onSearch={setGunplas} />
             <div className="grid grid-cols-2">
                 {gundams.map((gundam) => (
                     <div key={gundam.id} >
